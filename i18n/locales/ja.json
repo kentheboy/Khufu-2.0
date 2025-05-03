@@ -1,4 +1,14 @@
 {
+  "greetings": {
+    "hello": "こんにちは",
+    "goodbye": "さようなら",
+    "welcome": "ようこそ",
+    "thank you": "ありがとう",
+    "yes": "はい",
+    "no": "いいえ",
+    "please": "お願いします",
+    "sorry": "ごめんなさい"
+  },
   "home": {
     "reserve a car": "今すぐ予約する",
     "reservation": "ご予約",

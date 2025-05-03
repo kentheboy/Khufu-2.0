@@ -1,4 +1,14 @@
 {
+  "greetings": {
+    "hello": "안녕하세요",
+    "goodbye": "안녕히 가세요",
+    "welcome": "환영합니다",
+    "thank you": "감사합니다",
+    "yes": "네",
+    "no": "아니요",
+    "please": "부탁합니다",
+    "sorry": "죄송합니다"
+  },
   "home": {
     "reserve a car": "지금 예약하기",
     "reservation": "예약하기",

@@ -1,4 +1,14 @@
 {
+  "greetings": {
+    "hello": "Hello",
+    "goodbye": "Goodbye",
+    "welcome": "Welcome",
+    "thank you": "Thank you",
+    "yes": "Yes",
+    "no": "No",
+    "please": "Please",
+    "sorry": "Sorry"
+  },
   "home": {
     "reserve a car": "reserve a car",
     "reservation": "reservation",
