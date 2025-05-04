@@ -7,12 +7,19 @@ export default defineNuxtConfig({
   i18n: {
     defaultLocale: 'ja',
     locales: [
-      { code: 'en', file: 'en.json' },
       { code: 'ja', file: 'ja.json' },
+      { code: 'en', file: 'en.json' },
       { code: 'ko', file: 'ko.json' },
       { code: 'zh-yue', file: 'zh-yue.json' },
     ],
     lazy: true,
-    langDir: 'locales/'
-  }
+    langDir: 'locales/',
+    strategy: 'no_prefix', 
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+      alwaysRedirect: false
+    },
+  },
 });
