@@ -27,7 +27,7 @@ const items = [
     </div>
   </header>
 </template>
-<style scoped lang="scss">
+<style lang="scss">
 .header {
     height: 7.6rem;
     background-color: var(--color-skyblue);
