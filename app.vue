@@ -5,3 +5,6 @@
     </NuxtLayout>
   </UApp>
 </template>
+<style>
+@import "tailwindcss";
+</style>
