@@ -100,7 +100,6 @@ const items = [
 <style lang="scss">
 .header {
   height: 7.6rem;
-  background-color: var(--color-skyblue);
-  overflow: hidden;
+  background-color: var(--primary);
 }
 </style>
