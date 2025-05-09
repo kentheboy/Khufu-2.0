@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@nuxtjs/i18n",
   ],
-  css: ["@/assets/css/main.scss"],
+  css: ["~/assets/css/main.scss"],
   i18n: {
     defaultLocale: "ja",
     locales: [
