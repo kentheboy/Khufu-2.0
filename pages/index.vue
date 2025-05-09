@@ -15,7 +15,8 @@ const images = replaceInArray(Object.values(imageImports), "/_nuxt/public", "");
       <UCarousel
         v-slot="{ item }"
         loop
-        :autoplay="{ delay: 2000 }"
+        :autoplay="{ delay: 3000 }"
+        fade
         dots
         :items="images"
         :ui="{ item: 'flex justify-center items-center h-[400px]' }"
