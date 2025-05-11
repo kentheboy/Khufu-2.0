@@ -45,7 +45,7 @@ body {
   --br-9xs-5: 3.5px;
   --br-10xs-5: 2.5px;
   --br-10xs: 3px;
-  --color-font-primary: var(--color-steelblue);
+  --font-default-style: var(--color-steelblue);
   --primary: var(--color-skyblue);
   --secondary: var(--color-lightblue);
 }
@@ -53,4 +53,5 @@ body {
 * {
   font-family: var(--font-noto-sans);
   letter-spacing: 0.05em;
+  color: var(--font-default-style);
 }
