@@ -100,6 +100,9 @@ const items = [
 <style lang="scss">
 .header {
   height: 7.6rem;
-  background-color: var(--primary);
+  background-color: var(--ui-primary);
+  nav[aria-label="Main"] ul.isolate span{
+    color: var(--font-contrast-style);
+  }
 }
 </style>

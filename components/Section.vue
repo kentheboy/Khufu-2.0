@@ -13,7 +13,7 @@ const props = defineProps({
             {{ subtitle }}
         </h2>
         <hr>
-        <UContainer class="my-18 mx-auto text-center">
+        <UContainer class="my-18 mx-auto text-center max-w-lg">
             <slot />
         </UContainer>
     </UContainer>

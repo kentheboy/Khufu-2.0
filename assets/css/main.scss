@@ -46,12 +46,16 @@ body {
   --br-10xs-5: 2.5px;
   --br-10xs: 3px;
   --font-default-style: var(--color-steelblue);
-  --primary: var(--color-skyblue);
-  --secondary: var(--color-lightblue);
+  --font-contrast-style: var(--color-white);
+  --ui-primary: var(--color-skyblue);
+  --ui-secondary: var(--color-lightblue);
 }
 
 * {
   font-family: var(--font-noto-sans);
   letter-spacing: 0.05em;
   color: var(--font-default-style);
+  button.contrast, button.contrast>span.iconify {
+    color: var(--font-contrast-style);
+  }
 }
