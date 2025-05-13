@@ -29,7 +29,10 @@ const images = replaceInArray(Object.values(imageImports), "/_nuxt/public", "");
       </UCarousel>
     </UContainer>
     <Section title="SCHEDULE" :subtitle="t('home.Search by dates')">
-      <schedule />
+      <FrontSchedule />
+    </Section>
+    <Section title="VEHICLE LIST" :subtitle="t('home.Car list')">
+      <FrontVehicleList />
     </Section>
   </div>
 </template>
