@@ -16,7 +16,6 @@ const getTomorrowDate = () => {
 }
 const tomorrowDate = getTomorrowDate()
 const minDate = new CalendarDate(tomorrowDate.getFullYear(), tomorrowDate.getMonth() + 1, tomorrowDate.getDate());
-console.log(minDate);
 </script>
 <template>
     <UCalendar range v-model="date" :min-value="minDate"/>
