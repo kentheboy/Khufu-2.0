@@ -5,7 +5,7 @@ const props = defineProps({
 })
 </script>
 <template>
-    <UContainer class="h-32 mb-24 mx-auto text-center">
+    <UContainer class="mb-24 mx-auto text-center">
         <h1 class="text-3xl font-bold text-gray-800 dark:text-white">
             {{ title }}
         </h1>
