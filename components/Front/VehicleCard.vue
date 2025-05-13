@@ -6,8 +6,8 @@
       <img src="/images/car-images/ALPHARD7/1.jpg" class="rounded-t-lg" />
     </div>
     <div class="p-4">
-      <h3 class="text-lg font-semibold">ALPHARD</h3>
-      <p class="text-sm text-gray-500">在庫7台</p>
+      <h3 class="text-xl font-semibold">ALPHARD</h3>
+      <p class="text-sm">在庫7台</p>
     </div>
 
     <template #footer>
