@@ -19,9 +19,6 @@ const componentTopY = ref(0);
 onMounted(() => {
   if (containerRef.value) {
     const rect = containerRef.value.getBoundingClientRect();
-    console.log("title: " + props.title);
-    console.log("Component Top Y: ", rect.top);
-    console.log("window.scrollY: ", window.scrollY);
     componentTopY.value = rect.top + window.scrollY;
   }
 });
@@ -29,9 +26,7 @@ onMounted(() => {
 // Watch for scroll position
 const { y } = useScroll(window);
 watch(y, (scrollY) => {
-  console.log("Scroll Y:", scrollY);
   if (props.enableFadeIn) {
-    // Adjust threshold based on your preference
     isVisible.value = scrollY + window.innerHeight * 0.7 > componentTopY.value;
   }
 });
