@@ -4,6 +4,7 @@ import { ref, watch, onMounted } from "vue";
 const props = defineProps({
   mainStatement: String,
   description: String,
+  number: String,
   enableFadeIn: {
     type: Boolean,
     default: true,
@@ -17,18 +18,18 @@ const { isVisible } = useFadeInOnScroll(containerRef, props.enableFadeIn);
   <div
     ref="containerRef"
     :class="[
-      'section transition-opacity duration-700 ease-out feature-card-parent',
+      'section transition-opacity duration-700 ease-out feature-card-parent mb-4',
       isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none',
     ]"
   >
-    <UCard variant="soft" class="rounded-full feature-card flex items-center justify-center">
+    <UCard variant="soft" class="rounded-full feature-card flex items-center justify-center m-auto">
       <h1
         v-if="mainStatement"
         class="text-3xl font-bold text-gray-800 dark:text-white"
         v-html="mainStatement"
       ></h1>
     </UCard>
-    <div class="feature-number">01</div>
+    <div class="feature-number">{{number}}</div>
     <h3
       v-if="description"
       class="text-2xl text-gray-600 dark:text-gray-400 pb-3 mt-16 mb-16 mx-0"
@@ -51,7 +52,7 @@ const { isVisible } = useFadeInOnScroll(containerRef, props.enableFadeIn);
   .feature-number {
     position: absolute;
     top: 35px;
-    width: 100%;
+    width: 57vw;
     height: 100%;
     display: flex;
     align-items: center;
