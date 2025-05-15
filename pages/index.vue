@@ -28,6 +28,7 @@ const images = replaceInArray(Object.values(imageImports), "/_nuxt/public", "");
         <img :src="item" class="max-h-full max-w-full object-contain rounded-lg" />
       </UCarousel>
     </UContainer>
+    <ScrollToTop />
     <Section title="SCHEDULE" :subtitle="t('home.Search by dates')" :enableFadeIn="false">
       <FrontSchedule />
     </Section>
