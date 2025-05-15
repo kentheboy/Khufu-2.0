@@ -11,25 +11,8 @@ const props = defineProps({
   },
 });
 
-const isVisible = ref(!props.enableFadeIn);
-
-// Get y-axis of the component
-const containerRef = ref(null);
-const componentTopY = ref(0);
-onMounted(() => {
-  if (containerRef.value) {
-    const rect = containerRef.value.getBoundingClientRect();
-    componentTopY.value = rect.top + window.scrollY;
-  }
-});
-
-// Watch for scroll position
-const { y } = useScroll(window);
-watch(y, (scrollY) => {
-  if (props.enableFadeIn) {
-    isVisible.value = scrollY + window.innerHeight * 0.7 > componentTopY.value;
-  }
-});
+const containerRef = ref(null)
+const { isVisible } = useFadeInOnScroll(containerRef, props.enableFadeIn)
 </script>
 <template>
   <div

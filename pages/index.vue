@@ -34,7 +34,7 @@ const images = replaceInArray(Object.values(imageImports), "/_nuxt/public", "");
     <Section title="VEHICLE LIST" :subtitle="t('home.Car list')">
       <FrontVehicleList />
     </Section>
-    <Section>
+    <Section :enableFadeIn="false">
       <FrontFeatures />
     </Section>
   </div>
