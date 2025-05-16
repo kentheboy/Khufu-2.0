@@ -62,6 +62,35 @@ const { isVisible } = useFadeInOnScroll(containerRef, props.enableFadeIn);
     font-weight: 500;
     text-shadow: 4.46875px 8.9375px 8.94px rgba(0, 0, 0, .5);
   }
-
+  
+  @media screen and (max-width: 980px) {
+    .feature-card {
+      width: 24rem;
+      height: 24rem;
+    }
+    
+    .feature-number {
+      font-size: 8rem;
+      width: 50vw;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .feature-card {
+      width: 18rem;
+      height: 18rem;
+    }
+    
+    .feature-number {
+      font-size: 6rem;
+      width: 40vw;
+      top: 20px;
+    }
+    
+    h3 {
+      font-size: 1.2rem !important;
+      margin: 8px 0 !important;
+    }
+  }
 }
 </style>

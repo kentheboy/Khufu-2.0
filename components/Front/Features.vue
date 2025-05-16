@@ -32,3 +32,17 @@ const { t } = useI18n();
     </UContainer>
   </UContainer>
 </template>
+
+<style lang="scss" scoped>
+@media screen and (max-width: 980px) {
+  .container {
+    max-width: 95%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    max-width: 90%;
+  }
+}
+</style>

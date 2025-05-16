@@ -104,5 +104,25 @@ const items = [
   nav[aria-label="Main"] ul.isolate span{
     color: var(--font-contrast-style);
   }
+  
+  @media screen and (max-width: 980px) {
+    height: 6.5rem;
+    
+    .headerChild {
+      width: 95%;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    height: 5.5rem;
+    
+    .headerChild {
+      width: 90%;
+      
+      img.logo {
+        max-width: 120px;
+      }
+    }
+  }
 }
 </style>
