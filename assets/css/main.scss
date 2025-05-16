@@ -1,0 +1,61 @@
+html {
+  font-size: 16px;
+}
+
+@media screen and (max-width: 430px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+:root {
+  --font-noto-sans: "Noto Sans JP", sans-serif;
+  --font-default-optical-sizing: auto;
+  --font-default-style: normal;
+  --font-size-xl: 2rem;
+  --font-size-3xs: 1rem;
+  --font-size-xs: 1.2rem;
+  --font-size-52xl-5: 7.15rem;
+  --font-size-base: 1.6rem;
+  --font-size-5xs: 0.8rem;
+  --font-size-8xs: 0.5rem;
+  --font-size-4xs-5: 0.85rem;
+  --font-size-6xs: 0.7rem;
+  --font-size-6xs-5: 0.65rem;
+  --color-skyblue: #85b7d2;
+  --color-white: #fff;
+  --color-lightblue: rgba(192, 218, 232, 0.46);
+  --color-black: #000;
+  --color-steelblue: #418eb8;
+  --color-aliceblue: #e2eef5;
+  --color-silver: #c5c5c5;
+  --gap-11xs: 0.2rem;
+  --padding-5xs: 0.8rem;
+  --padding-3xs: 1rem;
+  --padding-base: 1.6rem;
+  --padding-9xs-8: 0.38rem;
+  --br-31xl: 50px;
+  --br-5xl-9: 24.9px;
+  --br-11xs-9: 1.9px;
+  --br-9xs-5: 3.5px;
+  --br-10xs-5: 2.5px;
+  --br-10xs: 3px;
+  --font-default-style: var(--color-steelblue);
+  --font-contrast-style: var(--color-white);
+  --ui-primary: var(--color-skyblue);
+  --ui-secondary: var(--color-lightblue);
+}
+
+* {
+  font-family: var(--font-noto-sans);
+  letter-spacing: 0.05em;
+  color: var(--font-default-style);
+  button.contrast, button.contrast>span.iconify {
+    color: var(--font-contrast-style);
+  }
+}
