@@ -208,7 +208,7 @@ const items = [
           icon="i-heroicons-bars-3"
           color="white"
           variant="ghost"
-          @click="isMobileMenuOpen = !isMobileMenuOpen"
+          @click="isMobileMenuOpen = true"
           aria-label="Toggle menu"
         />
         <UModal v-model="isMobileMenuOpen" :ui="{ width: 'w-full sm:w-1/2', height: 'h-auto' }">

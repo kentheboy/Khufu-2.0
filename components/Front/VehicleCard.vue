@@ -20,3 +20,17 @@
     </template>
   </UCard>
 </template>
+
+<style lang="scss" scoped>
+@media screen and (max-width: 750px) {
+  :deep(.u-card) {
+    width: 290px;
+    height: 326.24px;
+    
+    .p-0 img {
+      height: 160px;
+      object-fit: cover;
+    }
+  }
+}
+</style>

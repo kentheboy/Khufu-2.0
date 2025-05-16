@@ -21,7 +21,7 @@ const { t } = useI18n();
   .my-18 {
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 32px;
   }
 }
 </style>
