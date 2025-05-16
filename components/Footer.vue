@@ -2,7 +2,7 @@
 const { t } = useI18n();
 </script>
 <template>
-  <footer class="footer w-screen">
+  <footer class="footer w-full">
     <div
       class="footerChild flex flex-row flex-wrap justify-between h-full items-center w-9/10 mx-auto pt-10 pb-10"
     >

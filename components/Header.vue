@@ -1,5 +1,22 @@
 <script setup>
 const { t } = useI18n();
+const isMobileMenuOpen = ref(false);
+const isSmallScreen = ref(false);
+
+// Check for small screen on mount and window resize
+onMounted(() => {
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkScreenSize);
+});
+
+const checkScreenSize = () => {
+  isSmallScreen.value = window.innerWidth < 750;
+};
+
 const items = [
   {
     label: t("home.reserve a car"),
@@ -93,7 +110,57 @@ const items = [
       <a class="block" href="/">
         <img class="logo" alt="" src="/images/main_logo.png" />
       </a>
-      <UNavigationMenu :items="items" class="justify-end" />
+      <!-- Desktop navigation -->
+      <UNavigationMenu v-if="!isSmallScreen" :items="items" class="justify-end" />
+      
+      <!-- Mobile hamburger menu -->
+      <div v-else class="flex items-center">
+        <UButton
+          icon="i-heroicons-bars-3"
+          color="white"
+          variant="ghost"
+          @click="isMobileMenuOpen = !isMobileMenuOpen"
+          aria-label="Toggle menu"
+        />
+        <UModal v-model="isMobileMenuOpen" :ui="{ width: 'w-full sm:w-1/2', height: 'h-auto' }">
+          <div class="p-4">
+            <div class="flex justify-end mb-4">
+              <UButton
+                icon="i-heroicons-x-mark"
+                color="gray"
+                variant="ghost"
+                @click="isMobileMenuOpen = false"
+                aria-label="Close menu"
+              />
+            </div>
+            <nav class="flex flex-col gap-4">
+              <UButton
+                v-for="(item, index) in items"
+                :key="index"
+                :icon="item.icon"
+                variant="ghost"
+                block
+                color="gray"
+                @click="item.command && item.command()"
+              >{{ item.label }}</UButton>
+              <template v-for="(item, index) in items" :key="`submenu-${index}`">
+                <template v-if="item.children">
+                  <UButton 
+                    v-for="(child, childIndex) in item.children" 
+                    :key="`child-${childIndex}`"
+                    :icon="child.icon"
+                    variant="ghost"
+                    block
+                    color="gray"
+                    class="ml-4"
+                    @click="child.command && child.command()"
+                  >{{ child.label }}</UButton>
+                </template>
+              </template>
+            </nav>
+          </div>
+        </UModal>
+      </div>
     </div>
   </header>
 </template>

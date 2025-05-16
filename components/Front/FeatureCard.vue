@@ -61,6 +61,7 @@ const { isVisible } = useFadeInOnScroll(containerRef, props.enableFadeIn);
     color: var(--font-contrast-style);
     font-weight: 500;
     text-shadow: 4.46875px 8.9375px 8.94px rgba(0, 0, 0, .5);
+    right: 0;
   }
   
   @media screen and (max-width: 980px) {
@@ -72,6 +73,7 @@ const { isVisible } = useFadeInOnScroll(containerRef, props.enableFadeIn);
     .feature-number {
       font-size: 8rem;
       width: 50vw;
+      right: 5%;
     }
   }
   
@@ -85,6 +87,7 @@ const { isVisible } = useFadeInOnScroll(containerRef, props.enableFadeIn);
       font-size: 6rem;
       width: 40vw;
       top: 20px;
+      right: 10%;
     }
     
     h3 {

@@ -16,5 +16,12 @@ const { t } = useI18n();
 </template>
 
 
-<style>
+<style lang="scss">
+@media screen and (max-width: 750px) {
+  .my-18 {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+}
 </style>
