@@ -17,6 +17,95 @@ const checkScreenSize = () => {
   isSmallScreen.value = window.innerWidth < 750;
 };
 
+// Tree items for mobile menu
+const treeItems = [
+  {
+    label: t("home.reserve a car"),
+    icon: "lucide:calendar-clock",
+    value: "reserve",
+    command: () => {
+      console.log("hello");
+    }
+  },
+  {
+    label: t("home.language"),
+    icon: "lucide:globe",
+    value: "language",
+    children: [
+      {
+        label: "日本語",
+        icon: "lucide:home",
+        command: () => {
+          console.log("menu2");
+        }
+      },
+      {
+        label: "한국어",
+        icon: "lucide:home",
+        command: () => {
+          console.log("menu1");
+        }
+      },
+      {
+        label: "中文繁體（廣東話）",
+        icon: "lucide:home",
+        command: () => {
+          console.log("menu1");
+        }
+      }
+    ]
+  },
+  {
+    label: t("home.menu"),
+    icon: "lucide:milestone",
+    value: "menu",
+    children: [
+      {
+        label: t("home.Fees"),
+        icon: "lucide:home",
+        command: () => {
+          console.log("menu1");
+        }
+      },
+      {
+        label: t("home.Guid"),
+        icon: "lucide:home",
+        command: () => {
+          console.log("menu2");
+        }
+      },
+      {
+        label: t("home.Company info"),
+        icon: "lucide:home",
+        command: () => {
+          console.log("menu2");
+        }
+      },
+      {
+        label: t("home.Terms and Conditions of Lease"),
+        icon: "lucide:home",
+        command: () => {
+          console.log("menu2");
+        }
+      },
+      {
+        label: t("home.Privacy Policy"),
+        icon: "lucide:home",
+        command: () => {
+          console.log("menu2");
+        }
+      },
+      {
+        label: t("home.Articles"),
+        icon: "lucide:home",
+        command: () => {
+          console.log("menu2");
+        }
+      }
+    ]
+  }
+];
+
 const items = [
   {
     label: t("home.reserve a car"),
@@ -124,7 +213,8 @@ const items = [
         />
         <UModal v-model="isMobileMenuOpen" :ui="{ width: 'w-full sm:w-1/2', height: 'h-auto' }">
           <div class="p-4">
-            <div class="flex justify-end mb-4">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-medium">{{ t("home.menu") }}</h3>
               <UButton
                 icon="i-heroicons-x-mark"
                 color="gray"
@@ -133,31 +223,13 @@ const items = [
                 aria-label="Close menu"
               />
             </div>
-            <nav class="flex flex-col gap-4">
-              <UButton
-                v-for="(item, index) in items"
-                :key="index"
-                :icon="item.icon"
-                variant="ghost"
-                block
+            <div class="mobile-menu">
+              <UTree
+                :items="treeItems"
+                :default-expanded="['reserve', 'language', 'menu']"
                 color="gray"
-                @click="item.command && item.command()"
-              >{{ item.label }}</UButton>
-              <template v-for="(item, index) in items" :key="`submenu-${index}`">
-                <template v-if="item.children">
-                  <UButton 
-                    v-for="(child, childIndex) in item.children" 
-                    :key="`child-${childIndex}`"
-                    :icon="child.icon"
-                    variant="ghost"
-                    block
-                    color="gray"
-                    class="ml-4"
-                    @click="child.command && child.command()"
-                  >{{ child.label }}</UButton>
-                </template>
-              </template>
-            </nav>
+              />
+            </div>
           </div>
         </UModal>
       </div>
@@ -170,6 +242,15 @@ const items = [
   background-color: var(--ui-primary);
   nav[aria-label="Main"] ul.isolate span{
     color: var(--font-contrast-style);
+  }
+  
+  .mobile-menu {
+    max-height: 70vh;
+    overflow-y: auto;
+    
+    :deep(.u-tree) {
+      width: 100%;
+    }
   }
   
   @media screen and (max-width: 980px) {
