@@ -160,7 +160,7 @@ const treeItems = computed(() => {
   <Transition name="modal-fade">
     <div v-if="isSmallScreen && isMobileMenuOpen" class="fixed inset-0 z-50 flex items-center justify-center">
       <div class="fixed inset-0 bg-gray-900/75" @click="isMobileMenuOpen = false"></div>
-      <div class="relative z-10 bg-white dark:bg-gray-900 rounded-lg sm:max-w-md w-full max-h-[90vh] overflow-auto">
+      <div class="relative z-10 bg-white dark:bg-gray-900 rounded-lg sm:max-w-md w-full">
         <div class="p-4 w-full">
           <div class="flex justify-between items-center mb-4">
             <h3 class="text-lg font-medium">{{ t("home.menu") }}</h3>
@@ -172,11 +172,14 @@ const treeItems = computed(() => {
               aria-label="Close menu"
             />
           </div>
-          <div class="mobile-menu">
-            <UTree
-              :items="treeItems"
-              color="gray"
-            />
+          <div class="mobile-menu-container" style="height: 200px; max-height: 200px; overflow: hidden;">
+            <div class="mobile-menu" style="height: 100%; max-height: 200px; overflow-y: auto;">
+              <UTree
+                :items="treeItems"
+                color="gray"
+                class="tree-component"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -191,29 +194,63 @@ const treeItems = computed(() => {
     color: var(--font-contrast-style);
   }
   
-  .mobile-menu {
+  .mobile-menu-container {
     height: 200px; /* Fixed height for approximately three menu items */
+    max-height: 200px !important; /* Force max-height */
+    overflow: hidden !important; /* Prevent container from expanding */
+    position: relative; /* Establish positioning context */
+    box-sizing: border-box; /* Include padding in height calculation */
+  }
+  
+  .mobile-menu {
+    height: 100%;
+    max-height: 200px !important; /* Match container height */
     overflow-y: auto;
+    position: absolute !important; /* Position absolutely to prevent height changes */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  /* Specific styles for the tree component */
+  .tree-component {
+    width: 100%;
     
-    :deep(.u-tree) {
-      width: 100%;
-      
-      /* Drawer animation for submenu */
-      :deep(ul) {
-        overflow: hidden;
-        transition: height 0.3s ease, opacity 0.3s ease;
-        will-change: height, opacity;
-      }
-      
-      /* Target the chevron icon for rotation animation */
-      :deep(.i-heroicons-chevron-down) {
-        transition: transform 0.3s ease;
-      }
-      
-      /* Rotate chevron when expanded */
-      :deep([aria-expanded="true"] .i-heroicons-chevron-down) {
-        transform: rotate(180deg);
-      }
+    /* Override any height changes */
+    :deep(.u-tree-container) {
+      height: auto !important;
+    }
+    
+    /* Target the submenu container */
+    :deep(.u-tree-node-children) {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
+      display: block !important;
+      padding-top: 0;
+      padding-bottom: 0;
+      will-change: max-height, opacity, padding;
+    }
+    
+    /* Style for expanded submenu */
+    :deep([aria-expanded="true"] + .u-tree-node-children) {
+      max-height: 500px; /* Large enough to accommodate any submenu */
+      opacity: 1;
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+    
+    /* Target the chevron icon for rotation animation */
+    :deep(.i-heroicons-chevron-down) {
+      transition: transform 0.3s ease;
+      will-change: transform;
+    }
+    
+    /* Rotate chevron when expanded */
+    :deep([aria-expanded="true"] .i-heroicons-chevron-down) {
+      transform: rotate(180deg);
     }
   }
   
