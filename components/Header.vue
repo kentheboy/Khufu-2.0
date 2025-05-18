@@ -211,38 +211,43 @@ const items = [
           @click="isMobileMenuOpen = true"
           aria-label="Toggle menu"
         />
-        <UModal
-          v-model="isMobileMenuOpen"
-          prevent-close
-          :ui="{
-            width: 'sm:max-w-md w-full',
-            height: 'h-auto',
-            base: 'overflow-hidden',
-            container: 'flex flex-col',
-            background: 'bg-white dark:bg-gray-900',
-            ring: ''
-          }"
-        >
-          <div class="p-4">
-            <div class="flex justify-between items-center mb-4">
-              <h3 class="text-lg font-medium">{{ t("home.menu") }}</h3>
-              <UButton
-                icon="i-heroicons-x-mark"
-                color="gray"
-                variant="ghost"
-                @click="isMobileMenuOpen = false"
-                aria-label="Close menu"
-              />
+        <Teleport to="body">
+          <UModal 
+            v-if="isMobileMenuOpen" 
+            :open="isMobileMenuOpen" 
+            @close="isMobileMenuOpen = false"
+            :ui="{
+              width: 'sm:max-w-md w-full',
+              height: 'h-auto',
+              base: 'fixed inset-0 z-50 flex overflow-y-auto',
+              overlay: {
+                base: 'fixed inset-0 bg-gray-900/75'
+              },
+              container: 'relative flex flex-col m-auto',
+              padding: 'p-4'
+            }"
+          >
+            <div class="p-4">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-medium">{{ t("home.menu") }}</h3>
+                <UButton
+                  icon="i-heroicons-x-mark"
+                  color="gray"
+                  variant="ghost"
+                  @click="isMobileMenuOpen = false"
+                  aria-label="Close menu"
+                />
+              </div>
+              <div class="mobile-menu">
+                <UTree
+                  :items="treeItems"
+                  :default-expanded="['reserve', 'language', 'menu']"
+                  color="gray"
+                />
+              </div>
             </div>
-            <div class="mobile-menu">
-              <UTree
-                :items="treeItems"
-                :default-expanded="['reserve', 'language', 'menu']"
-                color="gray"
-              />
-            </div>
-          </div>
-        </UModal>
+          </UModal>
+        </Teleport>
       </div>
     </div>
   </header>
