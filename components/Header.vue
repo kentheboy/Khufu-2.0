@@ -227,12 +227,17 @@ const treeItems = computed(() => {
       overflow: hidden;
       max-height: 0;
       opacity: 0;
-      transform: translateY(-20px);
-      transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, padding 0.3s ease-in-out;
+      transform: translateY(-50px);
+      transition: max-height 0.5s cubic-bezier(0.19, 1, 0.22, 1), 
+                  opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1), 
+                  transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), 
+                  padding 0.5s cubic-bezier(0.19, 1, 0.22, 1);
       display: block !important;
       padding-top: 0;
       padding-bottom: 0;
       will-change: max-height, opacity, transform, padding;
+      position: relative;
+      z-index: 1;
     }
     
     /* Style for expanded submenu */
@@ -240,8 +245,8 @@ const treeItems = computed(() => {
       max-height: 500px; /* Large enough to accommodate any submenu */
       opacity: 1;
       transform: translateY(0);
-      padding-top: 4px;
-      padding-bottom: 4px;
+      padding-top: 8px;
+      padding-bottom: 8px;
     }
     
     /* Target the chevron icon for rotation animation */
