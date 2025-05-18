@@ -13,7 +13,13 @@ const props = defineProps({
 const { t } = useI18n();
 const expandedItems = ref([]);
 
-const toggleItem = (item) => {
+const toggleItem = (item, event) => {
+  // Stop event propagation to prevent parent menu items from toggling
+  if (event) {
+    event.stopPropagation();
+  }
+  
+  // Toggle the expanded state
   const index = expandedItems.value.indexOf(item.value || item.label);
   if (index === -1) {
     expandedItems.value.push(item.value || item.label);
@@ -21,7 +27,8 @@ const toggleItem = (item) => {
     expandedItems.value.splice(index, 1);
   }
   
-  if (item.command) {
+  // Execute the command if it exists
+  if (item.command && !item.children) {
     item.command();
   }
 };
@@ -37,7 +44,7 @@ const isExpanded = (item) => {
       <div 
         class="tree-item-content" 
         :class="{ 'has-children': item.children, 'expanded': isExpanded(item) }"
-        @click="toggleItem(item)"
+        @click="toggleItem(item, $event)"
       >
         <div class="item-icon">
           <UIcon v-if="item.icon" :name="item.icon" class="menu-icon" />
@@ -140,12 +147,12 @@ const isExpanded = (item) => {
 
 .submenu-animation-enter-from {
   opacity: 0;
-  transform: translateY(-20px);
+  transform: translateY(-50px);
 }
 
 .submenu-animation-leave-to {
   opacity: 0;
-  transform: translateY(-20px);
+  transform: translateY(-50px);
 }
 
 .level-0 > .tree-item > .tree-item-content {
