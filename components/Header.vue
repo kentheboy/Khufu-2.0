@@ -1,5 +1,6 @@
 <script setup>
 const { t } = useI18n();
+import TreeMenu from './TreeMenu.vue';
 const isMobileMenuOpen = ref(false);
 const isSmallScreen = ref(false);
 
@@ -174,10 +175,9 @@ const treeItems = computed(() => {
           </div>
           <div class="mobile-menu-container" style="height: 400px; max-height: 400px; overflow: hidden;">
             <div class="mobile-menu" style="height: 100%; max-height: 400px; overflow-y: auto;">
-              <UTree
+              <TreeMenu
                 :items="treeItems"
-                color="gray"
-                class="tree-component"
+                class="custom-tree-menu"
               />
             </div>
           </div>
@@ -213,52 +213,9 @@ const treeItems = computed(() => {
     bottom: 0;
   }
   
-  /* Specific styles for the tree component */
-  .tree-component {
+  /* Custom styles for the tree menu */
+  .custom-tree-menu {
     width: 100%;
-    
-    /* Override any height changes */
-    :deep(.u-tree-container) {
-      height: auto !important;
-    }
-    
-    /* Target the submenu container */
-    :deep(.u-tree-node-children) {
-      overflow: hidden;
-      max-height: 0;
-      opacity: 0;
-      transform: translateY(-50px);
-      transition: max-height 0.5s cubic-bezier(0.19, 1, 0.22, 1), 
-                  opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1), 
-                  transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), 
-                  padding 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-      display: block !important;
-      padding-top: 0;
-      padding-bottom: 0;
-      will-change: max-height, opacity, transform, padding;
-      position: relative;
-      z-index: 1;
-    }
-    
-    /* Style for expanded submenu */
-    :deep([aria-expanded="true"] + .u-tree-node-children) {
-      max-height: 500px; /* Large enough to accommodate any submenu */
-      opacity: 1;
-      transform: translateY(0);
-      padding-top: 8px;
-      padding-bottom: 8px;
-    }
-    
-    /* Target the chevron icon for rotation animation */
-    :deep(.i-heroicons-chevron-down) {
-      transition: transform 0.3s ease;
-      will-change: transform;
-    }
-    
-    /* Rotate chevron when expanded */
-    :deep([aria-expanded="true"] .i-heroicons-chevron-down) {
-      transform: rotate(180deg);
-    }
   }
   
   @media screen and (max-width: 980px) {
