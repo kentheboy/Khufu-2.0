@@ -1,20 +1,22 @@
 <script setup>
 const { t } = useI18n();
 const isMobileMenuOpen = ref(false);
-const isSmallScreen = ref(false);
+const isSmallScreen = ref(true); // Force mobile view for testing
 
 // Check for small screen on mount and window resize
 onMounted(() => {
-  checkScreenSize();
-  window.addEventListener('resize', checkScreenSize);
+  // checkScreenSize();
+  // window.addEventListener('resize', checkScreenSize);
+  console.log("Mobile view forced for testing");
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', checkScreenSize);
+  // window.removeEventListener('resize', checkScreenSize);
 });
 
 const checkScreenSize = () => {
-  isSmallScreen.value = window.innerWidth < 750;
+  // isSmallScreen.value = window.innerWidth < 750;
+  isSmallScreen.value = true; // Force mobile view
 };
 
 // Tree items for mobile menu
@@ -211,27 +213,29 @@ const items = [
           @click="isMobileMenuOpen = true"
           aria-label="Toggle menu"
         />
-        <UModal v-model="isMobileMenuOpen" :ui="{ width: 'w-full sm:w-1/2', height: 'h-auto' }">
-          <div class="p-4">
-            <div class="flex justify-between items-center mb-4">
-              <h3 class="text-lg font-medium">{{ t("home.menu") }}</h3>
-              <UButton
-                icon="i-heroicons-x-mark"
-                color="gray"
-                variant="ghost"
-                @click="isMobileMenuOpen = false"
-                aria-label="Close menu"
-              />
+        <Teleport to="body">
+          <UModal v-if="isMobileMenuOpen" :open="isMobileMenuOpen" @close="isMobileMenuOpen = false" :ui="{ width: 'w-full sm:w-1/2', height: 'h-auto' }">
+            <div class="p-4">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-medium">{{ t("home.menu") }}</h3>
+                <UButton
+                  icon="i-heroicons-x-mark"
+                  color="gray"
+                  variant="ghost"
+                  @click="isMobileMenuOpen = false"
+                  aria-label="Close menu"
+                />
+              </div>
+              <div class="mobile-menu">
+                <UTree
+                  :items="treeItems"
+                  :default-expanded="['reserve', 'language', 'menu']"
+                  color="gray"
+                />
+              </div>
             </div>
-            <div class="mobile-menu">
-              <UTree
-                :items="treeItems"
-                :default-expanded="['reserve', 'language', 'menu']"
-                color="gray"
-              />
-            </div>
-          </div>
-        </UModal>
+          </UModal>
+        </Teleport>
       </div>
     </div>
   </header>
