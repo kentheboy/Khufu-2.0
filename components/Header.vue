@@ -192,11 +192,28 @@ const treeItems = computed(() => {
   }
   
   .mobile-menu {
-    max-height: 70vh;
+    height: 200px; /* Fixed height for approximately three menu items */
     overflow-y: auto;
     
     :deep(.u-tree) {
       width: 100%;
+      
+      /* Drawer animation for submenu */
+      :deep(ul) {
+        overflow: hidden;
+        transition: height 0.3s ease, opacity 0.3s ease;
+        will-change: height, opacity;
+      }
+      
+      /* Target the chevron icon for rotation animation */
+      :deep(.i-heroicons-chevron-down) {
+        transition: transform 0.3s ease;
+      }
+      
+      /* Rotate chevron when expanded */
+      :deep([aria-expanded="true"] .i-heroicons-chevron-down) {
+        transform: rotate(180deg);
+      }
     }
   }
   
