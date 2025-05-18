@@ -17,12 +17,12 @@ const checkScreenSize = () => {
   isSmallScreen.value = window.innerWidth < 750;
 };
 
-// Tree items for mobile menu
-const treeItems = [
+// Single source of menu data
+const menuData = [
   {
     label: t("home.reserve a car"),
     icon: "lucide:calendar-clock",
-    value: "reserve",
+    id: "reserve",
     command: () => {
       console.log("hello");
     }
@@ -30,7 +30,7 @@ const treeItems = [
   {
     label: t("home.language"),
     icon: "lucide:globe",
-    value: "language",
+    id: "language",
     children: [
       {
         label: "日本語",
@@ -58,7 +58,7 @@ const treeItems = [
   {
     label: t("home.menu"),
     icon: "lucide:milestone",
-    value: "menu",
+    id: "menu",
     children: [
       {
         label: t("home.Fees"),
@@ -106,90 +106,31 @@ const treeItems = [
   }
 ];
 
-const items = [
-  {
-    label: t("home.reserve a car"),
-    icon: "lucide:calendar-clock",
-    command: () => {
-      console.log("hello");
-    },
-  },
-  {
-    label: t("home.language"),
-    icon: "lucide:globe",
-    children: [
-      {
-        label: "日本語",
-        icon: "lucide:home",
-        command: () => {
-          console.log("menu2");
-        },
-      },
-      {
-        label: "한국어",
-        icon: "lucide:home",
-        command: () => {
-          console.log("menu1");
-        },
-      },
-      {
-        label: "中文繁體（廣東話）",
-        icon: "lucide:home",
-        command: () => {
-          console.log("menu1");
-        },
-      },
-    ],
-  },
-  {
-    label: t("home.menu"),
-    icon: "lucide:milestone",
-    children: [
-      {
-        label: t("home.Fees"),
-        icon: "lucide:home",
-        command: () => {
-          console.log("menu1");
-        },
-      },
-      {
-        label: t("home.Guid"),
-        icon: "lucide:home",
-        command: () => {
-          console.log("menu2");
-        },
-      },
-      {
-        label: t("home.Company info"),
-        icon: "lucide:home",
-        command: () => {
-          console.log("menu2");
-        },
-      },
-      {
-        label: t("home.Terms and Conditions of Lease"),
-        icon: "lucide:home",
-        command: () => {
-          console.log("menu2");
-        },
-      },
-      {
-        label: t("home.Privacy Policy"),
-        icon: "lucide:home",
-        command: () => {
-          console.log("menu2");
-        },
-      },
-      {
-        label: t("home.Articles"),
-        icon: "lucide:home",
-        command: () => {
-          console.log("menu2");
-        },
-      },
-    ],
-  }
-];
+// Computed properties to derive menu items for different components
+const items = computed(() => {
+  return menuData.map(item => {
+    const newItem = { ...item };
+    delete newItem.id;
+    if (newItem.children) {
+      newItem.children = newItem.children.map(child => ({ ...child }));
+    }
+    return newItem;
+  });
+});
+
+const treeItems = computed(() => {
+  return menuData.map(item => {
+    const newItem = { ...item };
+    if (newItem.id) {
+      newItem.value = newItem.id;
+      delete newItem.id;
+    }
+    if (newItem.children) {
+      newItem.children = newItem.children.map(child => ({ ...child }));
+    }
+    return newItem;
+  });
+});
 </script>
 <template>
   <header class="header">
@@ -216,30 +157,31 @@ const items = [
   </header>
   
   <!-- Mobile menu modal - placed outside header to avoid nesting issues -->
-  <div v-if="isSmallScreen && isMobileMenuOpen" class="fixed inset-0 z-50 flex items-center justify-center">
-    <div class="fixed inset-0 bg-gray-900/75" @click="isMobileMenuOpen = false"></div>
-    <div class="relative z-10 bg-white dark:bg-gray-900 rounded-lg sm:max-w-md w-full max-h-[90vh] overflow-auto">
-      <div class="p-4 w-full">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="text-lg font-medium">{{ t("home.menu") }}</h3>
-          <UButton
-            icon="i-heroicons-x-mark"
-            color="gray"
-            variant="ghost"
-            @click="isMobileMenuOpen = false"
-            aria-label="Close menu"
-          />
-        </div>
-        <div class="mobile-menu">
-          <UTree
-            :items="treeItems"
-            :default-expanded="['reserve', 'language', 'menu']"
-            color="gray"
-          />
+  <Transition name="modal-fade">
+    <div v-if="isSmallScreen && isMobileMenuOpen" class="fixed inset-0 z-50 flex items-center justify-center">
+      <div class="fixed inset-0 bg-gray-900/75" @click="isMobileMenuOpen = false"></div>
+      <div class="relative z-10 bg-white dark:bg-gray-900 rounded-lg sm:max-w-md w-full max-h-[90vh] overflow-auto">
+        <div class="p-4 w-full">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-medium">{{ t("home.menu") }}</h3>
+            <UButton
+              icon="i-heroicons-x-mark"
+              color="gray"
+              variant="ghost"
+              @click="isMobileMenuOpen = false"
+              aria-label="Close menu"
+            />
+          </div>
+          <div class="mobile-menu">
+            <UTree
+              :items="treeItems"
+              color="gray"
+            />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </Transition>
 </template>
 <style lang="scss">
 .header {
@@ -277,5 +219,17 @@ const items = [
       }
     }
   }
+}
+
+/* Fade-in/out transition for menu modal */
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
 }
 </style>
