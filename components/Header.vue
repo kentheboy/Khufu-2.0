@@ -172,8 +172,8 @@ const treeItems = computed(() => {
               aria-label="Close menu"
             />
           </div>
-          <div class="mobile-menu-container" style="height: 200px; max-height: 200px; overflow: hidden;">
-            <div class="mobile-menu" style="height: 100%; max-height: 200px; overflow-y: auto;">
+          <div class="mobile-menu-container" style="height: 400px; max-height: 400px; overflow: hidden;">
+            <div class="mobile-menu" style="height: 100%; max-height: 400px; overflow-y: auto;">
               <UTree
                 :items="treeItems"
                 color="gray"
@@ -195,8 +195,8 @@ const treeItems = computed(() => {
   }
   
   .mobile-menu-container {
-    height: 200px; /* Fixed height for approximately three menu items */
-    max-height: 200px !important; /* Force max-height */
+    height: 400px; /* Fixed height as requested */
+    max-height: 400px !important; /* Force max-height */
     overflow: hidden !important; /* Prevent container from expanding */
     position: relative; /* Establish positioning context */
     box-sizing: border-box; /* Include padding in height calculation */
@@ -204,7 +204,7 @@ const treeItems = computed(() => {
   
   .mobile-menu {
     height: 100%;
-    max-height: 200px !important; /* Match container height */
+    max-height: 400px !important; /* Match container height */
     overflow-y: auto;
     position: absolute !important; /* Position absolutely to prevent height changes */
     top: 0;
@@ -227,17 +227,19 @@ const treeItems = computed(() => {
       overflow: hidden;
       max-height: 0;
       opacity: 0;
-      transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
+      transform: translateY(-20px);
+      transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, padding 0.3s ease-in-out;
       display: block !important;
       padding-top: 0;
       padding-bottom: 0;
-      will-change: max-height, opacity, padding;
+      will-change: max-height, opacity, transform, padding;
     }
     
     /* Style for expanded submenu */
     :deep([aria-expanded="true"] + .u-tree-node-children) {
       max-height: 500px; /* Large enough to accommodate any submenu */
       opacity: 1;
+      transform: translateY(0);
       padding-top: 4px;
       padding-bottom: 4px;
     }
