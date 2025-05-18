@@ -216,38 +216,30 @@ const items = [
   </header>
   
   <!-- Mobile menu modal - placed outside header to avoid nesting issues -->
-  <UModal 
-    v-model="isMobileMenuOpen"
-    :ui="{
-      width: 'sm:max-w-md',
-      height: 'sm:max-h-[90vh]',
-      container: 'flex flex-col bg-white dark:bg-gray-900 rounded-lg',
-      overlay: {
-        base: 'fixed inset-0 bg-gray-900/75'
-      },
-      base: 'fixed inset-0 z-50 flex items-center justify-center'
-    }"
-  >
-    <div class="p-4 w-full">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-lg font-medium">{{ t("home.menu") }}</h3>
-        <UButton
-          icon="i-heroicons-x-mark"
-          color="gray"
-          variant="ghost"
-          @click="isMobileMenuOpen = false"
-          aria-label="Close menu"
-        />
-      </div>
-      <div class="mobile-menu">
-        <UTree
-          :items="treeItems"
-          :default-expanded="['reserve', 'language', 'menu']"
-          color="gray"
-        />
+  <div v-if="isSmallScreen && isMobileMenuOpen" class="fixed inset-0 z-50 flex items-center justify-center">
+    <div class="fixed inset-0 bg-gray-900/75" @click="isMobileMenuOpen = false"></div>
+    <div class="relative z-10 bg-white dark:bg-gray-900 rounded-lg sm:max-w-md w-full max-h-[90vh] overflow-auto">
+      <div class="p-4 w-full">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-medium">{{ t("home.menu") }}</h3>
+          <UButton
+            icon="i-heroicons-x-mark"
+            color="gray"
+            variant="ghost"
+            @click="isMobileMenuOpen = false"
+            aria-label="Close menu"
+          />
+        </div>
+        <div class="mobile-menu">
+          <UTree
+            :items="treeItems"
+            :default-expanded="['reserve', 'language', 'menu']"
+            color="gray"
+          />
+        </div>
       </div>
     </div>
-  </UModal>
+  </div>
 </template>
 <style lang="scss">
 .header {
