@@ -1,6 +1,5 @@
 <script setup>
 const { t } = useI18n();
-import TreeMenu from './TreeMenu.vue';
 const isMobileMenuOpen = ref(false);
 const isSmallScreen = ref(false);
 
@@ -175,7 +174,7 @@ const treeItems = computed(() => {
           </div>
           <div class="mobile-menu-container" style="height: 400px; max-height: 400px; overflow: hidden;">
             <div class="mobile-menu" style="height: 100%; max-height: 400px; overflow-y: auto;">
-              <TreeMenu
+              <UTree
                 :items="treeItems"
                 class="custom-tree-menu"
               />
