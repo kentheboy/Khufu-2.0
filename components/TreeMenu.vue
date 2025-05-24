@@ -51,16 +51,16 @@ const isExpanded = (item) => {
         </div>
         <span class="item-label">{{ item.label }}</span>
         <div v-if="item.children" class="item-chevron">
-          <UIcon name="i-heroicons-chevron-down" class="chevron-icon" />
+          <UIcon v-if="item" name="i-heroicons-chevron-down" class="chevron-icon" />
         </div>
       </div>
       
       <transition 
         name="submenu-animation"
         @before-enter="el => { el._parent = el.parentNode; el._height = '0px'; }"
-        @enter="el => { el._height = el.scrollHeight + 'px'; requestAnimationFrame(() => { el.style.height = el._height }); }"
+        @enter="el => { el._height = el.scrollHeight + 'px'; window.requestAnimationFrame(() => { el.style.height = el._height }); }"
         @after-enter="el => { el.style.height = 'auto'; }"
-        @before-leave="el => { el.style.height = el.scrollHeight + 'px'; requestAnimationFrame(() => {}); }"
+        @before-leave="el => { el.style.height = el.scrollHeight + 'px'; window.requestAnimationFrame(() => {}); }"
         @leave="el => { el.style.height = '0px'; }"
       >
         <div v-if="item.children && isExpanded(item)" class="submenu-container">
