@@ -79,8 +79,8 @@ const { isVisible } = useFadeInOnScroll(containerRef, props.enableFadeIn);
   
   @media screen and (max-width: 720px) {
     .feature-card {
-      width: 61vw;
-      height: 61vw;
+      width: 45vw;
+      height: 45vw;
     }
     
     .feature-number {
