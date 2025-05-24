@@ -77,6 +77,17 @@ const { isVisible } = useFadeInOnScroll(containerRef, props.enableFadeIn);
     }
   }
   
+  @media screen and (max-width: 720px) {
+    .feature-card {
+      width: 61vw;
+      height: 61vw;
+    }
+    
+    .feature-number {
+      font-size: 16vw;
+    }
+  }
+  
   @media screen and (max-width: 480px) {
     .feature-card {
       width: 18rem;
