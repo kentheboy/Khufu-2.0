@@ -1,4 +1,5 @@
 <script setup>
+import { watch } from 'vue'
 const { t } = useI18n();
 const isMobileMenuOpen = ref(false);
 const isSmallScreen = ref(false);
@@ -6,11 +7,11 @@ const isSmallScreen = ref(false);
 // Check for small screen on mount and window resize
 onMounted(() => {
   checkScreenSize();
-  window.addEventListener('resize', checkScreenSize);
+  window.addEventListener("resize", checkScreenSize);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', checkScreenSize);
+  window.removeEventListener("resize", checkScreenSize);
 });
 
 const checkScreenSize = () => {
@@ -25,7 +26,7 @@ const menuData = [
     id: "reserve",
     command: () => {
       console.log("hello");
-    }
+    },
   },
   {
     label: t("home.language"),
@@ -37,23 +38,23 @@ const menuData = [
         icon: "lucide:home",
         command: () => {
           console.log("menu2");
-        }
+        },
       },
       {
         label: "한국어",
         icon: "lucide:home",
         command: () => {
           console.log("menu1");
-        }
+        },
       },
       {
         label: "中文繁體（廣東話）",
         icon: "lucide:home",
         command: () => {
           console.log("menu1");
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
   {
     label: t("home.menu"),
@@ -65,84 +66,88 @@ const menuData = [
         icon: "lucide:home",
         command: () => {
           console.log("menu1");
-        }
+        },
       },
       {
         label: t("home.Guid"),
         icon: "lucide:home",
         command: () => {
           console.log("menu2");
-        }
+        },
       },
       {
         label: t("home.Company info"),
         icon: "lucide:home",
         command: () => {
           console.log("menu2");
-        }
+        },
       },
       {
         label: t("home.Terms and Conditions of Lease"),
         icon: "lucide:home",
         command: () => {
           console.log("menu2");
-        }
+        },
       },
       {
         label: t("home.Privacy Policy"),
         icon: "lucide:home",
         command: () => {
           console.log("menu2");
-        }
+        },
       },
       {
         label: t("home.Articles"),
         icon: "lucide:home",
         command: () => {
           console.log("menu2");
-        }
-      }
-    ]
-  }
+        },
+      },
+    ],
+  },
 ];
 
 // Computed properties to derive menu items for different components
 const items = computed(() => {
-  return menuData.map(item => {
+  return menuData.map((item) => {
     const newItem = { ...item };
     delete newItem.id;
     if (newItem.children) {
-      newItem.children = newItem.children.map(child => ({ ...child }));
+      newItem.children = newItem.children.map((child) => ({ ...child }));
     }
     return newItem;
   });
 });
 
 const treeItems = computed(() => {
-  return menuData.map(item => {
+  return menuData.map((item) => {
     const newItem = { ...item };
     if (newItem.id) {
       newItem.value = newItem.id;
       delete newItem.id;
     }
     if (newItem.children) {
-      newItem.children = newItem.children.map(child => ({ ...child }));
+      newItem.children = newItem.children.map((child) => ({ ...child }));
     }
     return newItem;
   });
 });
+
+watch(isMobileMenuOpen, (val) => {
+  const method = val ? 'add' : 'remove';
+  document.body.style.overflow = val ? 'hidden' : '';
+  document.documentElement.style.overflow = val ? 'hidden' : '';
+});
 </script>
 <template>
   <header class="header">
-    <div
-      class="headerChild flex justify-between h-full items-center w-9/10 mx-auto"
-    >
+    <div class="headerChild flex justify-between h-full items-center w-9/10 mx-auto">
       <a class="block" href="/">
         <img class="logo" alt="" src="/images/main_logo.png" />
       </a>
       <!-- Desktop navigation -->
       <UNavigationMenu v-if="!isSmallScreen" :items="items" class="justify-end" />
-      
+
       <!-- Mobile hamburger menu -->
       <div v-else class="flex items-center">
         <UButton
@@ -155,10 +160,13 @@ const treeItems = computed(() => {
       </div>
     </div>
   </header>
-  
+
   <!-- Mobile menu modal - placed outside header to avoid nesting issues -->
   <Transition name="modal-fade">
-    <div v-if="isSmallScreen && isMobileMenuOpen" class="fixed inset-0 z-50 flex items-center justify-center">
+    <div
+      v-if="isSmallScreen && isMobileMenuOpen"
+      class="sp-menu-modal fixed inset-0 z-50 flex items-center justify-center"
+    >
       <div class="fixed inset-0 bg-gray-900/75" @click="isMobileMenuOpen = false"></div>
       <div class="relative z-10 bg-white dark:bg-gray-900 rounded-lg sm:max-w-md w-full">
         <div class="p-4 w-full">
@@ -172,12 +180,15 @@ const treeItems = computed(() => {
               aria-label="Close menu"
             />
           </div>
-          <div class="mobile-menu-container" style="height: 400px; max-height: 400px; overflow: hidden;">
-            <div class="mobile-menu" style="height: 100%; max-height: 400px; overflow-y: auto;">
-              <UTree
-                :items="treeItems"
-                class="custom-tree-menu"
-              />
+          <div
+            class="mobile-menu-container"
+            style="height: 400px; max-height: 400px; overflow: hidden"
+          >
+            <div
+              class="mobile-menu"
+              style="height: 100%; max-height: 400px; overflow-y: auto"
+            >
+              <UTree :items="treeItems" class="custom-tree-menu" />
             </div>
           </div>
         </div>
@@ -189,10 +200,10 @@ const treeItems = computed(() => {
 .header {
   height: 7.6rem;
   background-color: var(--ui-primary);
-  nav[aria-label="Main"] ul.isolate span{
+  nav[aria-label="Main"] ul.isolate span {
     color: var(--font-contrast-style);
   }
-  
+
   .mobile-menu-container {
     height: 400px; /* Fixed height as requested */
     max-height: 400px !important; /* Force max-height */
@@ -200,7 +211,7 @@ const treeItems = computed(() => {
     position: relative; /* Establish positioning context */
     box-sizing: border-box; /* Include padding in height calculation */
   }
-  
+
   .mobile-menu {
     height: 100%;
     max-height: 400px !important; /* Match container height */
@@ -211,26 +222,30 @@ const treeItems = computed(() => {
     right: 0;
     bottom: 0;
   }
-  
+
   /* Custom styles for the tree menu */
   .custom-tree-menu {
     width: 100%;
   }
-  
+
   @media screen and (max-width: 980px) {
     height: 6.5rem;
-    
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+    width: 100%;
+
     .headerChild {
       width: 95%;
     }
   }
-  
+
   @media screen and (max-width: 480px) {
     height: 5.5rem;
-    
+
     .headerChild {
       width: 90%;
-      
+
       img.logo {
         max-width: 120px;
       }
@@ -248,5 +263,9 @@ const treeItems = computed(() => {
 .modal-fade-leave-to {
   opacity: 0;
   transform: translateY(-20px);
+}
+
+.sp-menu-modal {
+  z-index: 10001;
 }
 </style>
