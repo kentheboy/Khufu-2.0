@@ -1,0 +1,9 @@
+{
+  "login": {
+    "welcome_back": "お帰りなさい、",
+    "lets_see": "今日は何がありますか？",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "login_button": "ログイン"
+  }
+}
