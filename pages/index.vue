@@ -40,3 +40,11 @@ const images = replaceInArray(Object.values(imageImports), "/_nuxt/public", "");
     </Section>
   </div>
 </template>
+
+<style scoped lang="scss">  
+.home {
+  @media screen and (max-width: 980px) {
+    margin-top: 6.5rem;
+  }
+}
+</style>

@@ -2,7 +2,7 @@
 const { t } = useI18n();
 </script>
 <template>
-  <footer class="footer w-screen">
+  <footer class="footer w-full">
     <div
       class="footerChild flex flex-row flex-wrap justify-between h-full items-center w-9/10 mx-auto pt-10 pb-10"
     >
@@ -63,5 +63,42 @@ const { t } = useI18n();
 <style lang="scss">
 .footer {
   background-color: var(--ui-primary);
+  
+  @media screen and (max-width: 980px) {
+    .footerChild {
+      width: 95%;
+      padding: 8px 0;
+    }
+    
+    ul {
+      flex-wrap: wrap;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .footerChild {
+      width: 90%;
+      flex-direction: column;
+      align-items: flex-start;
+      
+      & > div {
+        width: 100%;
+        flex-basis: 100% !important;
+        margin-bottom: 10px;
+        
+        &:last-child {
+          justify-content: flex-start;
+        }
+      }
+      
+      ul {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+    }
+  }
 }
 </style>
