@@ -75,7 +75,7 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <div class="login-page min-h-screen flex items-center justify-center">
+  <div class="login-page min-h-screen flex items-center justify-center bg-[url('/assets/admin/image/login_pattern.jpg')] bg-repeat bg-top bg-auto">
     <div
       class="login-container bg-white p-8 rounded-lg shadow-lg w-full max-w-md mx-4"
     >
@@ -152,11 +152,7 @@ const handleLogin = async () => {
       </form>
 
       <div class="mt-10 text-center">
-        <img
-          src="/images/main_logo_sm.png"
-          alt="Khufu 2.0"
-          class="h-10 mx-auto"
-        />
+        <a href="" class="text-sm">パスワードを忘れた時</a>
       </div>
     </div>
   </div>
@@ -164,7 +160,8 @@ const handleLogin = async () => {
 
 <style scoped lang="scss">
 .login-page {
-  background-color: var(--color-aliceblue);
+  // background-color: var(--color-aliceblue);
+
   padding-top: 2rem;
   padding-bottom: 2rem;
 
@@ -181,10 +178,7 @@ const handleLogin = async () => {
 
 .login-container {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-
-  @media screen and (max-width: 980px) {
-    max-width: 90%;
-  }
+  max-width: 450px;
 
   @media screen and (max-width: 480px) {
     padding: 1.5rem;

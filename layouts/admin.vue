@@ -3,8 +3,6 @@
     <main>
       <slot />
     </main>
+    <AdminFooter />
 </template>
 
-<script setup>
-import AdminHeader from '~/components/Admin/Header.vue';
-</script>
