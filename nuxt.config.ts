@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   ],
   css: ["~/assets/css/main.scss"],
   i18n: {
-    defaultLocale: "ja",
+    defaultLocale: "en", // Set to English for easier testing
     locales: [
       { code: "ja", file: "ja.json" },
       { code: "en", file: "en.json" },
@@ -20,7 +20,7 @@ export default defineNuxtConfig({
       { code: "zh-yue", file: "zh-yue.json" },
     ],
     lazy: true,
-    langDir: "locales/",
+    langDir: "locales/", // Use the locales directory
     strategy: "no_prefix",
     detectBrowserLanguage: {
       useCookie: true,
