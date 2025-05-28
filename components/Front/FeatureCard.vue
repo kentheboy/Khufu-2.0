@@ -59,7 +59,7 @@ const { isVisible } = useFadeInOnScroll(containerRef, props.enableFadeIn);
     font-weight: 500;
     text-shadow: 4.46875px 8.9375px 8.94px rgba(0, 0, 0, 0.5);
     right: 17%;
-    bottom: 8rem;
+    bottom:10rem;
   }
 
   @media screen and (max-width: 980px) {
@@ -84,24 +84,5 @@ const { isVisible } = useFadeInOnScroll(containerRef, props.enableFadeIn);
       right: -6vw;
     }
   }
-
-  // @media screen and (max-width: 480px) {
-  //   .feature-card {
-  //     width: 18rem;
-  //     height: 18rem;
-  //   }
-
-  //   .feature-number {
-  //     font-size: 6rem;
-  //     width: 40vw;
-  //     top: 20px;
-  //     right: 10%;
-  //   }
-
-  //   h3 {
-  //     font-size: 1.2rem !important;
-  //     margin: 8px 0 !important;
-  //   }
-  // }
 }
 </style>
