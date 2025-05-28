@@ -1,5 +1,10 @@
+<script setup lang="ts">
+const route = useRoute();
+
+const isAdminRoute = computed(() => route.path.startsWith('/admin'));
+</script>
 <template>
-  <NuxtLayout>
+  <NuxtLayout :name="isAdminRoute ? 'admin' : 'default'">
     <NuxtPage />
   </NuxtLayout>
 </template>
