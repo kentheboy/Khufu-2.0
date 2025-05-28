@@ -22,17 +22,20 @@ const { isVisible } = useFadeInOnScroll(containerRef, props.enableFadeIn);
       isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none',
     ]"
   >
-    <UCard variant="soft" class="rounded-full feature-card flex items-center justify-center m-auto">
+    <UCard
+      variant="soft"
+      class="rounded-full feature-card flex items-center justify-center m-auto"
+    >
       <h1
         v-if="mainStatement"
         class="text-3xl font-bold text-gray-800 dark:text-white"
         v-html="mainStatement"
       ></h1>
     </UCard>
-    <div class="feature-number">{{number}}</div>
+    <h2 class="feature-number">{{ number }}</h2>
     <h3
       v-if="description"
-      class="text-2xl text-gray-600 dark:text-gray-400 pb-3 mt-16 mb-16 mx-0"
+      class="text-2xl text-gray-600 dark:text-gray-400 pb-3 mt-10 mb-16 mx-0"
       v-html="description"
     ></h3>
   </div>
@@ -51,17 +54,35 @@ const { isVisible } = useFadeInOnScroll(containerRef, props.enableFadeIn);
   }
   .feature-number {
     position: absolute;
-    top: 35px;
-    width: 57vw;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: end;
     font-size: 10rem;
     color: var(--font-contrast-style);
     font-weight: 500;
-    text-shadow: 4.46875px 8.9375px 8.94px rgba(0, 0, 0, .5);
+    text-shadow: 4.46875px 8.9375px 8.94px rgba(0, 0, 0, 0.5);
+    right: 17%;
+    bottom:10rem;
   }
 
+  @media screen and (max-width: 980px) {
+    .feature-card {
+      width: 45vw;
+      height: 45vw;
+      h1 {
+        font-size: 4vw;
+      }
+    }
+    h3 {
+      font-size: 3vw;
+    }
+
+    .feature-number {
+      font-size: 16vw;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    .feature-number {
+      right: -6vw;
+    }
+  }
 }
 </style>
