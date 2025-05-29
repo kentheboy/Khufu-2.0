@@ -297,7 +297,6 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { useClientOnly } from '#app'
 
 // Stats Cards Data
 const stats = [
