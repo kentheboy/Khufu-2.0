@@ -1,9 +1,12 @@
+<script setup lang="ts">
+const route = useRoute();
+
+const isAdminRoute = computed(() => route.path.startsWith('/admin'));
+</script>
 <template>
-  <UApp>
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </UApp>
+  <NuxtLayout :name="isAdminRoute ? 'admin' : 'default'">
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 <style>
 @import "tailwindcss";
