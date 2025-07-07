@@ -11,22 +11,4 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
   ],
   css: ["~/assets/css/main.scss"],
-  i18n: {
-    defaultLocale: "en", // Set to English for easier testing
-    locales: [
-      { code: "ja", file: "ja.json" },
-      { code: "en", file: "en.json" },
-      { code: "ko", file: "ko.json" },
-      { code: "zh-yue", file: "zh-yue.json" },
-    ],
-    lazy: true,
-    langDir: "locales/", // Use the locales directory
-    strategy: "no_prefix",
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: "i18n_redirected",
-      redirectOn: "root",
-      alwaysRedirect: false,
-    },
-  },
 });
