@@ -14,8 +14,6 @@ const { t } = useI18n();
 .footer {
   background-color: #2c3e50;
   width: 100%;
-  position: fixed;
   bottom: 0;
-  z-index: 1000;
 }
 </style>
