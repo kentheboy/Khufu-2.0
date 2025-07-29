@@ -1,6 +1,6 @@
 <script setup>
 import { watch } from 'vue'
-const { t } = useI18n();
+const { t, locales, setLocale } = useI18n();
 const isMobileMenuOpen = ref(false);
 const isSmallScreen = ref(false);
 
@@ -24,7 +24,7 @@ const menuData = [
     label: t("home.reserve a car"),
     icon: "lucide:calendar-clock",
     id: "reserve",
-    command: () => {
+    onSelect() {
       console.log("hello");
     },
   },
@@ -36,22 +36,25 @@ const menuData = [
       {
         label: "日本語",
         icon: "lucide:home",
-        command: () => {
-          console.log("menu2");
+        onSelect() {
+          setLocale("ja");
+          window.location.reload()
         },
       },
       {
         label: "한국어",
         icon: "lucide:home",
-        command: () => {
-          console.log("menu1");
+        onSelect() {
+          setLocale("ko");
+          window.location.reload()
         },
       },
       {
         label: "中文繁體（廣東話）",
         icon: "lucide:home",
-        command: () => {
-          console.log("menu1");
+        onSelect() {
+          setLocale("zh-yue");
+          window.location.reload()
         },
       },
     ],
@@ -64,42 +67,42 @@ const menuData = [
       {
         label: t("home.Fees"),
         icon: "lucide:home",
-        command: () => {
+        onSelect() {
           console.log("menu1");
         },
       },
       {
         label: t("home.Guid"),
         icon: "lucide:home",
-        command: () => {
+        onSelect() {
           console.log("menu2");
         },
       },
       {
         label: t("home.Company info"),
         icon: "lucide:home",
-        command: () => {
+        onSelect() {
           console.log("menu2");
         },
       },
       {
         label: t("home.Terms and Conditions of Lease"),
         icon: "lucide:home",
-        command: () => {
+        onSelect() {
           console.log("menu2");
         },
       },
       {
         label: t("home.Privacy Policy"),
         icon: "lucide:home",
-        command: () => {
+        onSelect() {
           console.log("menu2");
         },
       },
       {
         label: t("home.Articles"),
         icon: "lucide:home",
-        command: () => {
+        onSelect() {
           console.log("menu2");
         },
       },
@@ -139,6 +142,7 @@ watch(isMobileMenuOpen, (val) => {
   document.documentElement.style.overflow = val ? 'hidden' : '';
 });
 </script>
+
 <template>
   <header class="header">
     <div class="headerChild flex justify-between h-full items-center w-9/10 mx-auto">
