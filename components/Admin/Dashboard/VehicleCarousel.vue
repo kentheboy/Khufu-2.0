@@ -1,3 +1,56 @@
+<script setup>
+import { ref } from 'vue'
+
+// Mock vehicle data
+const vehicles = ref([
+  {
+    id: 1,
+    name: 'Tesla Model 3',
+    image: '/images/car-images/ALPHARD7/1.jpg',
+    status: 'Available',
+    capacity: 5,
+    fuelType: 'Electric'
+  },
+  {
+    id: 2,
+    name: 'Toyota Alphard',
+    image: '/images/car-images/ALPHARD7/1.jpg',
+    status: 'Reserved',
+    capacity: 7,
+    fuelType: 'Hybrid'
+  },
+  {
+    id: 3,
+    name: 'Honda CR-V',
+    image: '/images/car-images/ALPHARD7/1.jpg',
+    status: 'Available',
+    capacity: 5,
+    fuelType: 'Gasoline'
+  }
+])
+
+// Carousel state
+const currentSlide = ref(0)
+
+// Carousel controls
+const nextSlide = () => {
+  if (currentSlide.value < vehicles.value.length - 1) {
+    currentSlide.value++
+  }
+}
+
+const prevSlide = () => {
+  if (currentSlide.value > 0) {
+    currentSlide.value--
+  }
+}
+
+const goToSlide = (index) => {
+  currentSlide.value = index
+}
+</script>
+
+
 <template>
   <UCard class="vehicle-carousel">
     <template #header>
@@ -84,59 +137,6 @@
     </template>
   </UCard>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-
-// Mock vehicle data
-const vehicles = ref([
-  {
-    id: 1,
-    name: 'Tesla Model 3',
-    image: '/images/car-images/ALPHARD7/1.jpg',
-    status: 'Available',
-    capacity: 5,
-    fuelType: 'Electric'
-  },
-  {
-    id: 2,
-    name: 'Toyota Alphard',
-    image: '/images/car-images/ALPHARD7/1.jpg',
-    status: 'Reserved',
-    capacity: 7,
-    fuelType: 'Hybrid'
-  },
-  {
-    id: 3,
-    name: 'Honda CR-V',
-    image: '/images/car-images/ALPHARD7/1.jpg',
-    status: 'Available',
-    capacity: 5,
-    fuelType: 'Gasoline'
-  }
-])
-
-// Carousel state
-const currentSlide = ref(0)
-
-// Carousel controls
-const nextSlide = () => {
-  if (currentSlide.value < vehicles.value.length - 1) {
-    currentSlide.value++
-  }
-}
-
-const prevSlide = () => {
-  if (currentSlide.value > 0) {
-    currentSlide.value--
-  }
-}
-
-const goToSlide = (index: number) => {
-  currentSlide.value = index
-}
-</script>
-
 <style lang="scss" scoped>
 .vehicle-carousel {
   height: 100%;

@@ -1,69 +1,4 @@
-<template>
-  <UCard class="weekly-reservations">
-    <template #header>
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-medium">Weekly Reservations</h3>
-        <UButton icon="i-lucide-more-horizontal" color="gray" variant="ghost" />
-      </div>
-    </template>
-    
-    <!-- Days of the week -->
-    <div class="flex border-b mb-4 overflow-x-auto">
-      <div 
-        v-for="day in days" 
-        :key="day.date" 
-        class="text-center px-4 py-2 min-w-[80px] cursor-pointer"
-        :class="{'border-b-2 border-blue-500 font-medium': day.isActive}"
-        @click="selectDay(day.date)"
-      >
-        <div class="text-sm">{{ day.name }}</div>
-        <div class="text-xs text-gray-500">{{ day.displayDate }}</div>
-      </div>
-    </div>
-    
-    <!-- Reservations for selected day -->
-    <div v-if="selectedDayReservations.length > 0" class="space-y-4">
-      <div v-for="reservation in selectedDayReservations" :key="reservation.id" class="reservation-item">
-        <div class="flex items-center">
-          <div class="text-sm font-medium w-24">{{ reservation.time }}</div>
-          <div class="flex-1">
-            <div class="flex items-center">
-              <img :src="reservation.vehicleImage" alt="Vehicle" class="w-12 h-12 object-cover rounded mr-3" />
-              <div>
-                <div class="font-medium">{{ reservation.vehicleName }}</div>
-                <div class="text-xs text-gray-500">{{ reservation.vehicleType }}</div>
-                <div class="text-xs text-gray-500">{{ reservation.vehicleSize }}</div>
-              </div>
-            </div>
-          </div>
-          <div class="flex-1">
-            <div class="font-medium">{{ reservation.customerName }}</div>
-            <div class="text-xs text-gray-500">{{ reservation.customerEmail }}</div>
-          </div>
-          <div class="w-24 text-right">
-            <UBadge :color="getStatusColor(reservation.status)" size="sm">
-              {{ reservation.status }}
-            </UBadge>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div v-else class="py-8 text-center text-gray-500">
-      No reservations for this day
-    </div>
-    
-    <template #footer>
-      <div class="text-center">
-        <UButton to="/admin/schedules" variant="ghost" trailing-icon="i-lucide-arrow-right">
-          View All Reservations
-        </UButton>
-      </div>
-    </template>
-  </UCard>
-</template>
-
-<script setup lang="ts">
+<script setup>
 import { ref, computed } from 'vue'
 
 // Generate days of the week
@@ -129,7 +64,7 @@ const selectedDayReservations = computed(() => {
 })
 
 // Select a day
-const selectDay = (date: Date) => {
+const selectDay = (date) => {
   selectedDay.value = date
   days.value.forEach(day => {
     day.isActive = day.date.toDateString() === date.toDateString()
@@ -137,7 +72,7 @@ const selectDay = (date: Date) => {
 }
 
 // Get status color
-const getStatusColor = (status: string) => {
+const getStatusColor = (status) => {
   switch (status) {
     case 'Confirmed':
       return 'green'
@@ -150,6 +85,72 @@ const getStatusColor = (status: string) => {
   }
 }
 </script>
+
+<template>
+  <UCard class="weekly-reservations">
+    <template #header>
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-medium">Weekly Reservations</h3>
+        <UButton icon="i-lucide-more-horizontal" color="gray" variant="ghost" />
+      </div>
+    </template>
+    
+    <!-- Days of the week -->
+    <div class="flex border-b mb-4 overflow-x-auto">
+      <div 
+        v-for="day in days" 
+        :key="day.date" 
+        class="text-center px-4 py-2 min-w-[80px] cursor-pointer"
+        :class="{'border-b-2 border-blue-500 font-medium': day.isActive}"
+        @click="selectDay(day.date)"
+      >
+        <div class="text-sm">{{ day.name }}</div>
+        <div class="text-xs text-gray-500">{{ day.displayDate }}</div>
+      </div>
+    </div>
+    
+    <!-- Reservations for selected day -->
+    <div v-if="selectedDayReservations.length > 0" class="space-y-4">
+      <div v-for="reservation in selectedDayReservations" :key="reservation.id" class="reservation-item">
+        <div class="flex items-center">
+          <div class="text-sm font-medium w-24">{{ reservation.time }}</div>
+          <div class="flex-1">
+            <div class="flex items-center">
+              <img :src="reservation.vehicleImage" alt="Vehicle" class="w-12 h-12 object-cover rounded mr-3" />
+              <div>
+                <div class="font-medium">{{ reservation.vehicleName }}</div>
+                <div class="text-xs text-gray-500">{{ reservation.vehicleType }}</div>
+                <div class="text-xs text-gray-500">{{ reservation.vehicleSize }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1">
+            <div class="font-medium">{{ reservation.customerName }}</div>
+            <div class="text-xs text-gray-500">{{ reservation.customerEmail }}</div>
+          </div>
+          <div class="w-24 text-right">
+            <UBadge :color="getStatusColor(reservation.status)" size="sm">
+              {{ reservation.status }}
+            </UBadge>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div v-else class="py-8 text-center text-gray-500">
+      No reservations for this day
+    </div>
+    
+    <template #footer>
+      <div class="text-center">
+        <UButton to="/admin/schedules" variant="ghost" trailing-icon="i-lucide-arrow-right">
+          View All Reservations
+        </UButton>
+      </div>
+    </template>
+  </UCard>
+</template>
+
 
 <style lang="scss" scoped>
 .weekly-reservations {

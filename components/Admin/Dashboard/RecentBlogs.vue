@@ -1,3 +1,35 @@
+<script setup>
+import { ref } from 'vue'
+
+// Mock blog data
+const blogs = ref([
+  {
+    id: 1,
+    title: 'Top 10 Electric Vehicles for 2025',
+    category: 'Electric',
+    date: 'May 25, 2025',
+    image: '/assets/admin/image/j529_2_18.png',
+    excerpt: 'Discover the most anticipated electric vehicles coming to market in 2025, featuring cutting-edge technology and impressive range capabilities.'
+  },
+  {
+    id: 2,
+    title: 'The Future of Autonomous Driving',
+    category: 'Technology',
+    date: 'May 20, 2025',
+    image: '/assets/admin/image/j529_2_18.png',
+    excerpt: 'Explore how autonomous driving technology is evolving and what to expect in the next generation of self-driving vehicles.'
+  },
+  {
+    id: 3,
+    title: 'Best Family SUVs of the Year',
+    category: 'SUV',
+    date: 'May 15, 2025',
+    image: '/assets/admin/image/j529_2_18.png',
+    excerpt: 'Our comprehensive guide to the most family-friendly SUVs on the market, with ratings for safety, comfort, and value.'
+  }
+])
+</script>
+
 <template>
   <UCard class="recent-blogs">
     <template #header>
@@ -33,37 +65,6 @@
   </UCard>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-
-// Mock blog data
-const blogs = ref([
-  {
-    id: 1,
-    title: 'Top 10 Electric Vehicles for 2025',
-    category: 'Electric',
-    date: 'May 25, 2025',
-    image: '/assets/admin/image/j529_2_18.png',
-    excerpt: 'Discover the most anticipated electric vehicles coming to market in 2025, featuring cutting-edge technology and impressive range capabilities.'
-  },
-  {
-    id: 2,
-    title: 'The Future of Autonomous Driving',
-    category: 'Technology',
-    date: 'May 20, 2025',
-    image: '/assets/admin/image/j529_2_18.png',
-    excerpt: 'Explore how autonomous driving technology is evolving and what to expect in the next generation of self-driving vehicles.'
-  },
-  {
-    id: 3,
-    title: 'Best Family SUVs of the Year',
-    category: 'SUV',
-    date: 'May 15, 2025',
-    image: '/assets/admin/image/j529_2_18.png',
-    excerpt: 'Our comprehensive guide to the most family-friendly SUVs on the market, with ratings for safety, comfort, and value.'
-  }
-])
-</script>
 
 <style lang="scss" scoped>
 .recent-blogs {
