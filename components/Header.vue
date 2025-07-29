@@ -1,5 +1,5 @@
 <script setup>
-import { watch } from 'vue'
+import { watch } from "vue";
 const { t, locales, setLocale } = useI18n();
 const isMobileMenuOpen = ref(false);
 const isSmallScreen = ref(false);
@@ -25,7 +25,13 @@ const menuData = [
     icon: "lucide:calendar-clock",
     id: "reserve",
     onSelect() {
-      console.log("hello");
+      window.scrollTo({
+        top: document.getElementById("schedule").offsetTop,
+        behavior: "smooth",
+      });
+      if (isSmallScreen.value) {
+        isMobileMenuOpen.value = false;
+      }
     },
   },
   {
@@ -38,7 +44,7 @@ const menuData = [
         icon: "lucide:home",
         onSelect() {
           setLocale("ja");
-          window.location.reload()
+          window.location.reload();
         },
       },
       {
@@ -46,7 +52,7 @@ const menuData = [
         icon: "lucide:home",
         onSelect() {
           setLocale("ko");
-          window.location.reload()
+          window.location.reload();
         },
       },
       {
@@ -54,7 +60,7 @@ const menuData = [
         icon: "lucide:home",
         onSelect() {
           setLocale("zh-yue");
-          window.location.reload()
+          window.location.reload();
         },
       },
     ],
@@ -137,20 +143,26 @@ const treeItems = computed(() => {
 });
 
 watch(isMobileMenuOpen, (val) => {
-  const method = val ? 'add' : 'remove';
-  document.body.style.overflow = val ? 'hidden' : '';
-  document.documentElement.style.overflow = val ? 'hidden' : '';
+  const method = val ? "add" : "remove";
+  document.body.style.overflow = val ? "hidden" : "";
+  document.documentElement.style.overflow = val ? "hidden" : "";
 });
 </script>
 
 <template>
   <header class="header">
-    <div class="headerChild flex justify-between h-full items-center w-9/10 mx-auto">
+    <div
+      class="headerChild flex justify-between h-full items-center w-9/10 mx-auto"
+    >
       <a class="block" href="/">
         <img class="logo" alt="" src="/images/main_logo.png" />
       </a>
       <!-- Desktop navigation -->
-      <UNavigationMenu v-if="!isSmallScreen" :items="items" class="justify-end" />
+      <UNavigationMenu
+        v-if="!isSmallScreen"
+        :items="items"
+        class="justify-end"
+      />
 
       <!-- Mobile hamburger menu -->
       <div v-else class="flex items-center">
@@ -171,8 +183,13 @@ watch(isMobileMenuOpen, (val) => {
       v-if="isSmallScreen && isMobileMenuOpen"
       class="sp-menu-modal fixed inset-0 z-50 flex items-center justify-center"
     >
-      <div class="fixed inset-0 bg-gray-900/75" @click="isMobileMenuOpen = false"></div>
-      <div class="relative z-10 bg-white dark:bg-gray-900 rounded-lg sm:max-w-md w-full">
+      <div
+        class="fixed inset-0 bg-gray-900/75"
+        @click="isMobileMenuOpen = false"
+      ></div>
+      <div
+        class="relative z-10 bg-white dark:bg-gray-900 rounded-lg sm:max-w-md w-full"
+      >
         <div class="p-4 w-full">
           <div class="flex justify-between items-center mb-4">
             <h3 class="text-lg font-medium">{{ t("home.menu") }}</h3>
