@@ -25,13 +25,18 @@ const menuData = [
     icon: "lucide:calendar-clock",
     id: "reserve",
     onSelect() {
+      if (isSmallScreen.value) {
+        window.scrollTo({
+          top: document.getElementById("schedule").offsetTop - document.querySelector(".header").offsetHeight,
+          behavior: "smooth",
+        });
+        isMobileMenuOpen.value = false;
+        return;
+      }
       window.scrollTo({
         top: document.getElementById("schedule").offsetTop,
         behavior: "smooth",
       });
-      if (isSmallScreen.value) {
-        isMobileMenuOpen.value = false;
-      }
     },
   },
   {
