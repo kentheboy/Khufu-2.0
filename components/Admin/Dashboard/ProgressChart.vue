@@ -1,3 +1,29 @@
+<script setup>
+import { ref, computed } from 'vue'
+
+// Period options
+const periods = [
+  { label: 'Last 7 days', value: '7d' },
+  { label: 'Last 30 days', value: '30d' },
+  { label: 'Last 90 days', value: '90d' },
+]
+
+const selectedPeriod = ref('30d')
+
+// Mock data
+const progressPercentage = ref(72)
+const totalVehicles = ref(24)
+const availableVehicles = ref(17)
+const reservedVehicles = ref(4)
+const maintenanceVehicles = ref(3)
+
+// Calculate progress offset for SVG circle
+const progressOffset = computed(() => {
+  const circumference = 2 * Math.PI * 45
+  return circumference - (progressPercentage.value / 100) * circumference
+})
+</script>
+
 <template>
   <UCard class="progress-chart">
     <template #header>
@@ -71,31 +97,6 @@
   </UCard>
 </template>
 
-<script setup lang="ts">
-import { ref, computed } from 'vue'
-
-// Period options
-const periods = [
-  { label: 'Last 7 days', value: '7d' },
-  { label: 'Last 30 days', value: '30d' },
-  { label: 'Last 90 days', value: '90d' },
-]
-
-const selectedPeriod = ref('30d')
-
-// Mock data
-const progressPercentage = ref(72)
-const totalVehicles = ref(24)
-const availableVehicles = ref(17)
-const reservedVehicles = ref(4)
-const maintenanceVehicles = ref(3)
-
-// Calculate progress offset for SVG circle
-const progressOffset = computed(() => {
-  const circumference = 2 * Math.PI * 45
-  return circumference - (progressPercentage.value / 100) * circumference
-})
-</script>
 
 <style lang="scss" scoped>
 .progress-chart {

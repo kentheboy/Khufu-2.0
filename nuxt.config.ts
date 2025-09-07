@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   ],
   css: ["~/assets/css/main.scss"],
   i18n: {
-    defaultLocale: "en", // Set to English for easier testing
+    defaultLocale: "ja", // Set to English for easier testing
     locales: [
       { code: "ja", file: "ja.json" },
       { code: "en", file: "en.json" },

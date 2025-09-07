@@ -1,6 +1,6 @@
 <script setup>
-import { watch } from 'vue'
-const { t } = useI18n();
+import { watch } from "vue";
+const { t, locales, setLocale } = useI18n();
 const isMobileMenuOpen = ref(false);
 const isSmallScreen = ref(false);
 
@@ -24,34 +24,48 @@ const menuData = [
     label: t("home.reserve a car"),
     icon: "lucide:calendar-clock",
     id: "reserve",
-    command: () => {
-      console.log("hello");
+    onSelect() {
+      if (isSmallScreen.value) {
+        window.scrollTo({
+          top: document.getElementById("schedule").offsetTop - document.querySelector(".header").offsetHeight,
+          behavior: "smooth",
+        });
+        isMobileMenuOpen.value = false;
+        return;
+      }
+      window.scrollTo({
+        top: document.getElementById("schedule").offsetTop,
+        behavior: "smooth",
+      });
     },
   },
   {
     label: t("home.language"),
-    icon: "lucide:globe",
+    icon: "lucide:earth",
     id: "language",
     children: [
       {
         label: "日本語",
-        icon: "lucide:home",
-        command: () => {
-          console.log("menu2");
+        icon: "mdi:translate",
+        onSelect() {
+          setLocale("ja");
+          window.location.reload();
         },
       },
       {
         label: "한국어",
-        icon: "lucide:home",
-        command: () => {
-          console.log("menu1");
+        icon: "mdi:translate",
+        onSelect() {
+          setLocale("ko");
+          window.location.reload();
         },
       },
       {
         label: "中文繁體（廣東話）",
-        icon: "lucide:home",
-        command: () => {
-          console.log("menu1");
+        icon: "mdi:translate",
+        onSelect() {
+          setLocale("zh-yue");
+          window.location.reload();
         },
       },
     ],
@@ -63,43 +77,43 @@ const menuData = [
     children: [
       {
         label: t("home.Fees"),
-        icon: "lucide:home",
-        command: () => {
+        icon: "lucide:japanese-yen",
+        onSelect() {
           console.log("menu1");
         },
       },
       {
         label: t("home.Guid"),
-        icon: "lucide:home",
-        command: () => {
+        icon: "lucide:hand-helping",
+        onSelect() {
           console.log("menu2");
         },
       },
+      // {
+      //   label: t("home.Company info"),
+      //   icon: "lucide:home",
+      //   onSelect() {
+      //     console.log("menu2");
+      //   },
+      // },
       {
-        label: t("home.Company info"),
-        icon: "lucide:home",
-        command: () => {
+        label: t("home.Articles"),
+        icon: "lucide:luggage",
+        onSelect() {
           console.log("menu2");
         },
       },
       {
         label: t("home.Terms and Conditions of Lease"),
-        icon: "lucide:home",
-        command: () => {
+        icon: "lucide:handshake",
+        onSelect() {
           console.log("menu2");
         },
       },
       {
         label: t("home.Privacy Policy"),
-        icon: "lucide:home",
-        command: () => {
-          console.log("menu2");
-        },
-      },
-      {
-        label: t("home.Articles"),
-        icon: "lucide:home",
-        command: () => {
+        icon: "lucide:handshake",
+        onSelect() {
           console.log("menu2");
         },
       },
@@ -134,19 +148,26 @@ const treeItems = computed(() => {
 });
 
 watch(isMobileMenuOpen, (val) => {
-  const method = val ? 'add' : 'remove';
-  document.body.style.overflow = val ? 'hidden' : '';
-  document.documentElement.style.overflow = val ? 'hidden' : '';
+  const method = val ? "add" : "remove";
+  document.body.style.overflow = val ? "hidden" : "";
+  document.documentElement.style.overflow = val ? "hidden" : "";
 });
 </script>
+
 <template>
   <header class="header">
-    <div class="headerChild flex justify-between h-full items-center w-9/10 mx-auto">
+    <div
+      class="headerChild flex justify-between h-full items-center w-9/10 mx-auto"
+    >
       <a class="block" href="/">
         <img class="logo" alt="" src="/images/main_logo.png" />
       </a>
       <!-- Desktop navigation -->
-      <UNavigationMenu v-if="!isSmallScreen" :items="items" class="justify-end" />
+      <UNavigationMenu
+        v-if="!isSmallScreen"
+        :items="items"
+        class="justify-end"
+      />
 
       <!-- Mobile hamburger menu -->
       <div v-else class="flex items-center">
@@ -167,8 +188,13 @@ watch(isMobileMenuOpen, (val) => {
       v-if="isSmallScreen && isMobileMenuOpen"
       class="sp-menu-modal fixed inset-0 z-50 flex items-center justify-center"
     >
-      <div class="fixed inset-0 bg-gray-900/75" @click="isMobileMenuOpen = false"></div>
-      <div class="relative z-10 bg-white dark:bg-gray-900 rounded-lg sm:max-w-md w-full">
+      <div
+        class="fixed inset-0 bg-gray-900/75"
+        @click="isMobileMenuOpen = false"
+      ></div>
+      <div
+        class="relative z-10 bg-white dark:bg-gray-900 rounded-lg sm:max-w-md w-full"
+      >
         <div class="p-4 w-full">
           <div class="flex justify-between items-center mb-4">
             <h3 class="text-lg font-medium">{{ t("home.menu") }}</h3>

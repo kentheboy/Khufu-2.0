@@ -29,7 +29,7 @@ const images = replaceInArray(Object.values(imageImports), "/_nuxt/public", "");
       </UCarousel>
     </UContainer>
     <ScrollToTop />
-    <Section title="SCHEDULE" :subtitle="t('home.Search by dates')" :enableFadeIn="false">
+    <Section title="SCHEDULE" :subtitle="t('home.Search by dates')" :enableFadeIn="false" id="schedule">
       <FrontSchedule />
     </Section>
     <Section title="VEHICLE LIST" :subtitle="t('home.Car list')">

@@ -1,27 +1,4 @@
-<template>
-  <UCard class="stats-card">
-    <div class="flex items-start justify-between">
-      <div>
-        <h3 class="text-sm font-medium text-gray-500">{{ title }}</h3>
-        <div class="mt-1 flex items-baseline">
-          <span class="text-2xl font-semibold">{{ value }}</span>
-          <span class="ml-1 text-sm text-gray-500">{{ subValue }}</span>
-        </div>
-        <div class="mt-2">
-          <span :class="[trend === 'up' ? 'text-green-500' : 'text-red-500', 'text-xs flex items-center']">
-            <UIcon :name="trend === 'up' ? 'i-lucide-trending-up' : 'i-lucide-trending-down'" class="mr-1" />
-            {{ trendValue }}
-          </span>
-        </div>
-      </div>
-      <div :class="[iconBgColor, 'rounded-md p-2']">
-        <UIcon :name="icon" :class="[iconColor, 'size-6']" />
-      </div>
-    </div>
-  </UCard>
-</template>
-
-<script setup lang="ts">
+<script setup>
 defineProps({
   title: {
     type: String,
@@ -50,7 +27,7 @@ defineProps({
   trend: {
     type: String,
     default: 'up',
-    validator: (value: string) => ['up', 'down'].includes(value)
+    validator: (value) => ['up', 'down'].includes(value)
   },
   trendValue: {
     type: String,
@@ -58,6 +35,30 @@ defineProps({
   }
 })
 </script>
+
+<template>
+  <UCard class="stats-card">
+    <div class="flex items-start justify-between">
+      <div>
+        <h3 class="text-sm font-medium text-gray-500">{{ title }}</h3>
+        <div class="mt-1 flex items-baseline">
+          <span class="text-2xl font-semibold">{{ value }}</span>
+          <span class="ml-1 text-sm text-gray-500">{{ subValue }}</span>
+        </div>
+        <div class="mt-2">
+          <span :class="[trend === 'up' ? 'text-green-500' : 'text-red-500', 'text-xs flex items-center']">
+            <UIcon :name="trend === 'up' ? 'i-lucide-trending-up' : 'i-lucide-trending-down'" class="mr-1" />
+            {{ trendValue }}
+          </span>
+        </div>
+      </div>
+      <div :class="[iconBgColor, 'rounded-md p-2']">
+        <UIcon :name="icon" :class="[iconColor, 'size-6']" />
+      </div>
+    </div>
+  </UCard>
+</template>
+
 
 <style lang="scss" scoped>
 .stats-card {
