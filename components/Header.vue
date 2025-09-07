@@ -41,12 +41,12 @@ const menuData = [
   },
   {
     label: t("home.language"),
-    icon: "lucide:globe",
+    icon: "lucide:earth",
     id: "language",
     children: [
       {
         label: "日本語",
-        icon: "lucide:home",
+        icon: "mdi:translate",
         onSelect() {
           setLocale("ja");
           window.location.reload();
@@ -54,7 +54,7 @@ const menuData = [
       },
       {
         label: "한국어",
-        icon: "lucide:home",
+        icon: "mdi:translate",
         onSelect() {
           setLocale("ko");
           window.location.reload();
@@ -62,7 +62,7 @@ const menuData = [
       },
       {
         label: "中文繁體（廣東話）",
-        icon: "lucide:home",
+        icon: "mdi:translate",
         onSelect() {
           setLocale("zh-yue");
           window.location.reload();
@@ -77,42 +77,42 @@ const menuData = [
     children: [
       {
         label: t("home.Fees"),
-        icon: "lucide:home",
+        icon: "lucide:japanese-yen",
         onSelect() {
           console.log("menu1");
         },
       },
       {
         label: t("home.Guid"),
-        icon: "lucide:home",
+        icon: "lucide:hand-helping",
         onSelect() {
           console.log("menu2");
         },
       },
+      // {
+      //   label: t("home.Company info"),
+      //   icon: "lucide:home",
+      //   onSelect() {
+      //     console.log("menu2");
+      //   },
+      // },
       {
-        label: t("home.Company info"),
-        icon: "lucide:home",
+        label: t("home.Articles"),
+        icon: "lucide:luggage",
         onSelect() {
           console.log("menu2");
         },
       },
       {
         label: t("home.Terms and Conditions of Lease"),
-        icon: "lucide:home",
+        icon: "lucide:handshake",
         onSelect() {
           console.log("menu2");
         },
       },
       {
         label: t("home.Privacy Policy"),
-        icon: "lucide:home",
-        onSelect() {
-          console.log("menu2");
-        },
-      },
-      {
-        label: t("home.Articles"),
-        icon: "lucide:home",
+        icon: "lucide:handshake",
         onSelect() {
           console.log("menu2");
         },
